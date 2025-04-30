@@ -1,2 +1,2 @@
 # From-coding-backend-FastAPI-to-mastering-generative-AI
-It is planned to be a tutorial containing four parts that will give you how to use generative AI tools to bridge your business and ai applications.
+This comprehensive tutorial is divided into four parts that will guide you through using generative AI tools to seamlessly integrate AI capabilities into your business applications.
