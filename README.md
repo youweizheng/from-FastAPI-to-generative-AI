@@ -50,18 +50,27 @@ Installed 31 packages in 61ms
 Switched to a new branch 'part01'
 ```
 
-- Create app folder and main.py
+- Create **app** folder and `main.py`
 ```bash
 >> cd app
 >> uv run uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
-- Create docker folder and files
+- Create *Docker* folder and files
 01. Create a folder called `docker`<br>
 02. Create a file called `Dockerfile.app`<br>
 03. Create a file called `docker-compose.yml`<br>
 
-- Run app with Docker
+- Run **app** with *Docker*
 ```bash
 >> docker compose -f docker/docker-compose-base.yml up -d --build
 ```
+
+- Create `models_business.py` to model business data
+- Run **app** and **business database** with *Docker*
+```bash
+>> docker compose -f docker/docker-compose-business.yml up -d --build
+```
+- Create `create_table.py`
+- Create `insert_table.py`
+

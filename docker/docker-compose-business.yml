@@ -1,0 +1,42 @@
+name: from-fastapi-to-genai
+
+services:
+  fastapi_app:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.app
+    container_name: "app"
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    networks:
+      - net
+    volumes:
+      - ../app:/app
+
+  business_db:
+    image: timescale/timescaledb-ha:pg16
+    container_name: "business_db"
+    environment:
+      POSTGRES_DB: business
+      POSTGRES_USER: youwei
+      POSTGRES_PASSWORD: fromfastapitogenai
+    ports:
+      - "5118:5432"
+    volumes:
+      - business_data:/home/postgres/pgdata/data
+    restart: unless-stopped
+    networks:
+      - net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U youwei -d business"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+networks:
+  net:
+    driver: bridge
+
+volumes:
+  business_data:
