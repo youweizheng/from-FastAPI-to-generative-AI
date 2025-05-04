@@ -55,3 +55,13 @@ Switched to a new branch 'part01'
 >> cd app
 >> uv run uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 ```
+
+- Create docker folder and files
+01. Create a folder called `docker`<br>
+02. Create a file called `Dockerfile.app`<br>
+03. Create a file called `docker-compose.yml`<br>
+
+- Run app with Docker
+```bash
+>> docker compose -f docker/docker-compose-base.yml up -d --build
+```

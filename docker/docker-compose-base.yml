@@ -1,0 +1,19 @@
+name: from-fastapi-to-genai
+
+services:
+  fastapi_app:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.app
+    container_name: "app"
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    networks:
+      - net
+    volumes:
+      - ../app:/app
+
+networks:
+  net:
+    driver: bridge
