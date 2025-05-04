@@ -1,0 +1,8 @@
+sqlalchemy
+fastapi
+python-dotenv
+psycopg2-binary>=2.9.10
+openai
+timescale_vector==0.0.7
+requests
+uvicorn
