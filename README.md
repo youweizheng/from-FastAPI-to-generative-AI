@@ -42,3 +42,16 @@ Resolved 31 packages in 2.66s
 Prepared 10 packages in 1.41s
 Installed 31 packages in 61ms
 ```
+
+### Repo branching: Part 01
+- Create new branch
+```bash
+>> git checkout -b part01
+Switched to a new branch 'part01'
+```
+
+- Create app folder and main.py
+```bash
+>> cd app
+>> uv run uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+```
