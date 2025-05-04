@@ -25,31 +25,24 @@ def create_fake_chinese_cuisine():
         "Dumplings"
     ]
     
-    # List of descriptions for Chinese dishes
-    descriptions = [
-        "A spicy, stir-fried dish with chicken, peanuts, vegetables, and chili peppers",
-        "Crispy pork pieces in a tangy sweet and sour sauce",
-        "Spicy tofu dish with minced meat in a chili sauce",
-        "Crispy roasted duck served with thin pancakes and hoisin sauce",
-        "Assorted small bite-sized portions of food served in small steamer baskets",
-        "Interactive dining experience with a simmering pot of broth",
-        "Clear broth with wonton dumplings and vegetables",
-        "Crispy fried rolls filled with vegetables and meat",
-        "Stir-fried noodles with vegetables and meat",
-        "Steamed or fried dough pockets filled with meat or vegetables"
-    ]
-    
     # Create a session
     db = BusinessSessionMaker()
     
     try:
         # Insert 10 rows of fake data
-        for i in range(10):
+        for dish_name in chinese_dishes:
+            # Generate a more detailed description using Faker
+            description = f"{dish_name} - {fake.sentence(nb_words=6, variable_nb_words=True)}. {fake.sentence(nb_words=8, variable_nb_words=True)}"
+            
+            # Generate a more realistic price (in cents)
+            base_price = random.randint(800, 2000)  # $8.00 to $20.00
+            unit_price = base_price + random.randint(-200, 200)  # Add some variation
+            
             dish = Cuisine(
-                name=chinese_dishes[i],
-                description=descriptions[i],
-                unit_price=random.randint(100, 500),  # Random price between 100 and 500
-                is_available=random.choice([True, False])
+                name=dish_name,
+                description=description,
+                unit_price=unit_price,
+                is_available=fake.boolean(chance_of_getting_true=80)  # 80% chance of being available
             )
             db.add(dish)
         

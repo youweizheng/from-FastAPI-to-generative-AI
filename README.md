@@ -73,4 +73,3 @@ Switched to a new branch 'part01'
 ```
 - Create `create_table.py`
 - Create `insert_table.py`
-
