@@ -13,3 +13,6 @@ wheels/
 .python-version
 pyproject.toml
 uv.lock
+
+# Environment variables
+.env

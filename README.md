@@ -23,6 +23,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 - Initialize virtual environment
 ```bash
+>> mkdir your-project-name
 >> uv init --no-workspace
 Initialized project `your-project-name`
 ```
