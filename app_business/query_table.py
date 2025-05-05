@@ -1,10 +1,9 @@
-from typing import List
 from sqlalchemy.orm import Session
 
 from models_business import Cuisine
 from database import BusinessSessionMaker
 
-def get_all_cuisines(db_session: Session) -> str:
+def query_all_cuisines(db_session: Session) -> str:
     """Get all cuisines from the database as plain text."""
     cuisines = db_session.query(Cuisine).all()
     return "\n".join([
@@ -18,7 +17,7 @@ if __name__ == "__main__":
     
     try:
         # Fetch all cuisines
-        cuisines_text = get_all_cuisines(db_session)
+        cuisines_text = query_all_cuisines(db_session)
         print(cuisines_text)
     finally:
         # Close the session

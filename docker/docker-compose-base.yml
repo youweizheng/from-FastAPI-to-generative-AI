@@ -1,7 +1,7 @@
-name: from-fastapi-to-genai
+name: from-fastapi-2-genai
 
 services:
-  fastapi_app:
+  app_business:
     build:
       context: ..
       dockerfile: docker/Dockerfile.app
@@ -12,7 +12,7 @@ services:
     networks:
       - net
     volumes:
-      - ../app:/app
+      - ../app_business:/app
 
 networks:
   net:

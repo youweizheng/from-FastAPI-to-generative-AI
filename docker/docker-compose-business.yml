@@ -1,30 +1,30 @@
-name: from-fastapi-to-genai
+name: from-fastapi-2-genai
 
 services:
-  fastapi_app:
+  app_business:
     build:
       context: ..
       dockerfile: docker/Dockerfile.app
-    container_name: "app"
+    container_name: "app_business"
     ports:
       - "8000:8000"
     restart: unless-stopped
     networks:
       - net
     volumes:
-      - ../app:/app
+      - ../app_business:/app
 
-  business_db:
+  db_business:
     image: timescale/timescaledb-ha:pg16
-    container_name: "business_db"
+    container_name: "db_business"
     environment:
       POSTGRES_DB: business
       POSTGRES_USER: youwei
-      POSTGRES_PASSWORD: fromfastapitogenai
+      POSTGRES_PASSWORD: fromfastapi2genai
     ports:
       - "5118:5432"
     volumes:
-      - business_data:/home/postgres/pgdata/data
+      - data_business:/home/postgres/pgdata/data
     restart: unless-stopped
     networks:
       - net
@@ -39,4 +39,4 @@ networks:
     driver: bridge
 
 volumes:
-  business_data:
+  data_business:

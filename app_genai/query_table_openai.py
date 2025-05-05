@@ -4,7 +4,7 @@ import os
 
 from sqlalchemy.orm import Session
 from database import BusinessSessionMaker
-from query_table import get_all_cuisines
+from query_table import query_all_cuisines
 
 load_dotenv()
 
@@ -25,7 +25,7 @@ def generate_answer(query: str, db_session: Session) -> str:
     """
 
     # Prepare context from search results
-    context = get_all_cuisines(db_session)
+    context = query_all_cuisines(db_session)
     
     print(f"Generating answer using {MODEL}")
     messages = [
