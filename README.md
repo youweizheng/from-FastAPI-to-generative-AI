@@ -1,10 +1,7 @@
 # From FastAPI to generative AI
 This comprehensive tutorial is divided into four parts that will guide you through using generative AI tools to seamlessly integrate AI capabilities into your business applications.
 
-## Codebase setup
-This helps you setup the codebase in order to run the app as demonstrated in the video which includes Virtual Environment, Docker and .env etc.
-
-### Virtual Environment
+## Virtual Environment
 I use uv from astral to setup virtual environment und make sure you update uv to the latest version. 
 
 - This project runs uv v0.7.2
@@ -44,7 +41,10 @@ Prepared 10 packages in 1.41s
 Installed 31 packages in 61ms
 ```
 
-### Repo branching: Part 01
+## Codebase setup
+This helps you setup the codebase in order to run the app as demonstrated in the video which includes Virtual Environment, Docker and .env etc.
+
+### Part 01
 - Create new branch
 ```bash
 >> git checkout -b part01
