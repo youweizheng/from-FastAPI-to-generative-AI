@@ -16,3 +16,6 @@ uv.lock
 
 # Environment variables
 .env
+
+# Unwanted files
+poorly-formatted-example.py
