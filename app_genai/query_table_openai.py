@@ -1,12 +1,20 @@
 from openai import OpenAI
 from dotenv import load_dotenv
-import os
-
 from sqlalchemy.orm import Session
-from database import BusinessSessionMaker
-from query_table import query_all_cuisines
 
 load_dotenv()
+
+# Add app_business to Python path
+import os
+from pathlib import Path
+import sys
+
+project_root = Path(__file__).parent.parent
+app_business_path = str(project_root / "app_business")
+sys.path.append(app_business_path)
+
+from database import BusinessSessionMaker
+from query_table import query_all_cuisines
 
 # Initialize OpenAI client
 openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))

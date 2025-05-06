@@ -60,7 +60,7 @@ Switched to a new branch 'part01'
 - Create *Docker* folder and files
 01. Create a folder called `docker`<br>
 02. Create a file called `Dockerfile.app`<br>
-03. Create a file called `docker-compose.yml`<br>
+03. Create a file called `docker-compose-business.yml`<br>
 
 - Run **app** and **business database** with *Docker*
 ```bash
@@ -70,3 +70,12 @@ Switched to a new branch 'part01'
 - Create `models_business.py` to model business data
 - Create `create_table.py`
 - Create `insert_table.py`
+
+### Part 02
+The only bridge you need is pagi
+
+### Part 03
+Context Engineering
+
+### Part 04
+Bring pieces together.
