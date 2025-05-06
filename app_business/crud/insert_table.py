@@ -1,4 +1,3 @@
-from sqlalchemy.orm import sessionmaker
 from models_business import Base, Cuisine
 from faker import Faker
 import random

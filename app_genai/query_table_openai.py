@@ -1,20 +1,18 @@
 from openai import OpenAI
 from dotenv import load_dotenv
 from sqlalchemy.orm import Session
+import os
+from pathlib import Path
+import sys
+from database import BusinessSessionMaker
+from query_table import query_all_cuisines
 
 load_dotenv()
 
 # Add app_business to Python path
-import os
-from pathlib import Path
-import sys
-
 project_root = Path(__file__).parent.parent
 app_business_path = str(project_root / "app_business")
 sys.path.append(app_business_path)
-
-from database import BusinessSessionMaker
-from query_table import query_all_cuisines
 
 # Initialize OpenAI client
 openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
@@ -41,14 +39,14 @@ def generate_answer(query: str, db_session: Session) -> str:
         {"role": "user", "content": f"Context:\n{context}\n\nQuestion: {query}\n\nPlease provide a concise answer based on the context."}
     ]
 
-    response = openai_client.chat.completions.create(
+    response = openai_client.responses.create(
         model=MODEL,
-        messages=messages,
+        input=messages,
         temperature=0.7,
-        max_tokens=1000
+        max_output_tokens=1000
     )
 
-    answer = response.choices[0].message.content
+    answer = response.output_text
     print("\nGenerated Answer:")
     print(answer)
     return answer
