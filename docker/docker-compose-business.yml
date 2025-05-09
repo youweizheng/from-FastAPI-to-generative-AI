@@ -34,9 +34,30 @@ services:
       timeout: 5s
       retries: 5
 
+  db_vector:
+    image: timescale/timescaledb-ha:pg16
+    container_name: "db_vector"
+    environment:
+      POSTGRES_DB: vector
+      POSTGRES_USER: youwei
+      POSTGRES_PASSWORD: fromfastapi2genai
+    ports:
+      - "5119:5432"
+    volumes:
+      - data_vector:/home/postgres/pgdata/data
+    restart: unless-stopped
+    networks:
+      - net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U youwei -d vector"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
 networks:
   net:
     driver: bridge
 
 volumes:
   data_business:
+  data_vector:

@@ -1,4 +1,4 @@
-# client_database.py
+# app_business/database.py
 from typing import Annotated
 
 from sqlalchemy.orm import sessionmaker

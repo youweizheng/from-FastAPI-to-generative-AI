@@ -7,3 +7,4 @@ timescale_vector==0.0.7
 requests
 uvicorn
 Faker
+pgai
