@@ -4,8 +4,8 @@ from sqlalchemy.orm import Session
 import os
 from pathlib import Path
 import sys
-from database import BusinessSessionMaker
-from query_table import query_all_cuisines
+from app_business.database import BusinessSessionMaker
+from app_business.query_table import query_all_cuisines
 
 load_dotenv()
 

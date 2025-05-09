@@ -1,59 +1,58 @@
-from models_business import Base, Cuisine
-from faker import Faker
-import random
-from database import business_engine, BusinessSessionMaker
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
-# Create tables
-Base.metadata.create_all(bind=business_engine)
+from app_genai.models_vector import Cuisine, CuisinesContent
 
-# Initialize Faker
-fake = Faker()
+import json
 
-def create_fake_chinese_cuisine():
-    # List of common Chinese dishes
-    chinese_dishes = [
-        "Kung Pao Chicken",
-        "Sweet and Sour Pork",
-        "Mapo Tofu",
-        "Peking Duck",
-        "Dim Sum",
-        "Hot Pot",
-        "Wonton Soup",
-        "Spring Rolls",
-        "Chow Mein",
-        "Dumplings"
-    ]
-    
-    # Create a session
-    db = BusinessSessionMaker()
-    
+# Database URLs - replace these with your actual database URLs
+VECTOR_DATABASE_URL = "postgresql://youwei:fromfastapi2genai@localhost:5119/vector"  # or your actual vector database URL
+
+
+def migrate_cuisine_to_content():
+    # Create engines for both databases
+    vector_engine = create_engine(VECTOR_DATABASE_URL)
+
+    # Create sessions
+    VectorSession = sessionmaker(bind=vector_engine)
+
+    vector_session = VectorSession()
+
     try:
-        # Insert 10 rows of fake data
-        for dish_name in chinese_dishes:
-            # Generate a more detailed description using Faker
-            description = f"{dish_name} - {fake.sentence(nb_words=6, variable_nb_words=True)}. {fake.sentence(nb_words=8, variable_nb_words=True)}"
-            
-            # Generate a more realistic price (in cents)
-            base_price = random.randint(800, 2000)  # $8.00 to $20.00
-            unit_price = base_price + random.randint(-200, 200)  # Add some variation
-            
-            dish = Cuisine(
-                name=dish_name,
-                description=description,
-                unit_price=unit_price,
-                is_available=fake.boolean(chance_of_getting_true=80)  # 80% chance of being available
+        # Get all cuisines from vector database
+        cuisines = vector_session.query(Cuisine).all()
+
+        # Migrate each cuisine to cuisines_content
+        for cuisine in cuisines:
+            # Create metadata dictionary
+            metadata = {
+                "id": cuisine.id,
+                "name": cuisine.name,
+                "unit_price": cuisine.unit_price,
+                "is_available": cuisine.is_available,
+            }
+
+            # Create content string
+            contents = f"id: {cuisine.id} - name: {cuisine.name} - description: {cuisine.description} - unit_price: {cuisine.unit_price} - is_available: {cuisine.is_available}"
+
+            # Create new CuisinesContent entry
+            cuisine_content = CuisinesContent(
+                metadata_value=json.dumps(metadata), contents=contents
             )
-            db.add(dish)
-        
+
+            # Add to vector database
+            vector_session.add(cuisine_content)
+
         # Commit the changes
-        db.commit()
-        print("Successfully inserted 10 rows of Chinese cuisine data!")
-        
+        vector_session.commit()
+        print("Migration completed successfully!")
+
     except Exception as e:
-        print(f"An error occurred: {e}")
-        db.rollback()
+        print(f"An error occurred during migration: {str(e)}")
+        vector_session.rollback()
     finally:
-        db.close()
+        vector_session.close()
+
 
 if __name__ == "__main__":
-    create_fake_chinese_cuisine()
+    migrate_cuisine_to_content()

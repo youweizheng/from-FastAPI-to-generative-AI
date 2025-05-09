@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
-from models_business import Cuisine
-from database import BusinessSessionMaker
+from app_business.models_business import Cuisine
+from app_business.database import BusinessSessionMaker
 
 
 def query_all_cuisines(db_session: Session) -> str:

@@ -1,7 +1,7 @@
 from models_business import Base, Cuisine
 from faker import Faker
 import random
-from database import business_engine, BusinessSessionMaker
+from app_business.database import business_engine, BusinessSessionMaker
 
 # Create tables
 Base.metadata.create_all(bind=business_engine)

@@ -54,6 +54,22 @@ services:
       timeout: 5s
       retries: 5
 
+  vectorizer-worker:
+    image: timescale/pgai-vectorizer-worker:latest
+    container_name: vectorizer-worker
+    env_file:
+      - ../.env
+    environment:
+      PGAI_VECTORIZER_WORKER_DB_URL: postgres://youwei:fromfastapi2genai@db_vector:5432/vector
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      db_vector:
+        condition: service_healthy
+    networks:
+      - net
+
 networks:
   net:
     driver: bridge
