@@ -1,22 +1,31 @@
 # app_genai/crud/create_vector_table.py
 import psycopg
-import os
 from app_genai.database import DATABASE_VECTOR_URL
 from dotenv import load_dotenv
 
 load_dotenv()
 
 def create_vector_table(conn: psycopg.Connection):
-    with conn.cursor() as cur:    
+    with conn.cursor() as cur:
+        # First, ensure the required extensions are installed
+        cur.execute("CREATE EXTENSION IF NOT EXISTS plpython3u;")
+        cur.execute("CREATE EXTENSION IF NOT EXISTS ai;")
+        conn.commit()
+        
+        # Then create the vector table
         cur.execute("""
             SELECT ai.create_vectorizer(
                 'cuisines_content'::regclass,
                 if_not_exists => true,
                 loading => ai.loading_column(column_name=>'contents'),
-                embedding => ai.embedding_openai(model=>'text-embedding-ada-002', dimensions=>'1536', api_key=>%s),
-                destination => ai.destination_table(view_name=>'cuisines_content_embedding')
+                embedding => ai.embedding_openai(
+                    model => 'text-embedding-ada-002',
+                    dimensions => 1536,
+                    api_key_name => 'OPENAI_API_KEY'
+                ),
+                destination => ai.destination_table(view_name=>'cuisines_vector')
             )
-        """, (os.getenv('OPENAI_API_KEY'),))   
+        """)   
     conn.commit()
     
 if __name__ == "__main__":

@@ -1,26 +1,31 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from app_genai.models_vector import Cuisine, CuisinesContent
+from app_business.models_business import Cuisine
+from app_genai.models_vector import CuisinesContent
 
 import json
 
 # Database URLs - replace these with your actual database URLs
-VECTOR_DATABASE_URL = "postgresql://youwei:fromfastapi2genai@localhost:5119/vector"  # or your actual vector database URL
+BUSINESS_DATABASE_URL = "postgresql://youwei:fromfastapi2genai@localhost:5118/business"  # business database URL
+VECTOR_DATABASE_URL = "postgresql://youwei:fromfastapi2genai@localhost:5119/vector"  # vector database URL
 
 
 def migrate_cuisine_to_content():
     # Create engines for both databases
+    business_engine = create_engine(BUSINESS_DATABASE_URL)
     vector_engine = create_engine(VECTOR_DATABASE_URL)
 
     # Create sessions
+    BusinessSession = sessionmaker(bind=business_engine)
     VectorSession = sessionmaker(bind=vector_engine)
 
+    business_session = BusinessSession()
     vector_session = VectorSession()
 
     try:
-        # Get all cuisines from vector database
-        cuisines = vector_session.query(Cuisine).all()
+        # Get all cuisines from business database
+        cuisines = business_session.query(Cuisine).all()
 
         # Migrate each cuisine to cuisines_content
         for cuisine in cuisines:
@@ -51,6 +56,7 @@ def migrate_cuisine_to_content():
         print(f"An error occurred during migration: {str(e)}")
         vector_session.rollback()
     finally:
+        business_session.close()
         vector_session.close()
 
 

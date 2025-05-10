@@ -1,4 +1,4 @@
-from models_business import Base, Cuisine
+from app_business.models_business import Base, Cuisine
 from faker import Faker
 import random
 from app_business.database import business_engine, BusinessSessionMaker

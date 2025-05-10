@@ -44,7 +44,7 @@ Installed 31 packages in 61ms
 ## Codebase setup
 This helps you setup the codebase in order to run the app as demonstrated in the video which includes Virtual Environment, Docker and .env etc.
 
-### Part 01
+### Part 01: You don't even need vector database
 - Create new branch
 ```bash
 >> git checkout -b part01
@@ -68,12 +68,18 @@ Switched to a new branch 'part01'
 ```
 
 - Create `models_business.py` to model business data
-- Create `create_table.py`
-- Create `insert_table.py`
+- Create `create_table.py` and run
+- Create `insert_table.py` and run
 
-### Part 02
-The only bridge you need is pagi
+### Part 02: The only bridge you need is pagi
+- Run **vector database** and **vectorizer worker** with *Docker*
+```bash
+>> docker compose -f docker/docker-compose-genai.yml up -d --build
+```
 
+- Create *content table* via `create_content_table.py`
+- Migrate data from business to content table via `migrate_table.py`
+- Create *vector table* via `create_vector_table.py`
 
 ### Part 03
 Context Engineering
