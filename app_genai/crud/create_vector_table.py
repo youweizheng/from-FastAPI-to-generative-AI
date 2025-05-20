@@ -19,7 +19,7 @@ def create_vector_table(conn: psycopg.Connection):
                 if_not_exists => true,
                 loading => ai.loading_column(column_name=>'contents'),
                 embedding => ai.embedding_openai(
-                    model => 'text-embedding-ada-002',
+                    model => 'text-embedding-3-small',
                     dimensions => 1536,
                     api_key_name => 'OPENAI_API_KEY'
                 ),
