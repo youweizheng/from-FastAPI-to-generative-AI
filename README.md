@@ -81,11 +81,14 @@ Switched to a new branch 'part01'
 - Migrate data from business to content table via `migrate_table.py`
 - Create *vector table* via `create_vector_table.py`
 
-### Part 03: Search the vector table
+### Part 03: Search vector table using sdk
 - To re-create all the tables, you need to run:
 ```bash
 >> docker compose -f docker/docker-compose-genai.yml down -v
 ```
+
+- Create `explore_using_sdk.py` and demo
+- Create `search_using_sdk.py` and run examples
 
 ### Part 04
 Bring pieces together.

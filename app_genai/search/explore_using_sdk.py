@@ -7,4 +7,3 @@ from timescale_vector import client as timescale_client
 from app_genai.database import DATABASE_VECTOR_URL
 
 load_dotenv()
-
