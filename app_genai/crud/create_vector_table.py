@@ -19,13 +19,13 @@ def create_vector_table(conn: psycopg.Connection):
                 if_not_exists => true,
                 loading => ai.loading_column(column_name=>'contents'),
                 embedding => ai.embedding_openai(
-                    model => 'text-embedding-ada-002',
+                    model => 'text-embedding-3-small',
                     dimensions => 1536,
                     api_key_name => 'OPENAI_API_KEY'
                 ),
                 destination => ai.destination_table(view_name=>'cuisines_vector')
             )
-        """)   
+        """)
     conn.commit()
     
 if __name__ == "__main__":

@@ -37,10 +37,13 @@ services:
   db_vector:
     image: timescale/timescaledb-ha:pg16
     container_name: "db_vector"
+    env_file:
+      - ../.env
     environment:
       POSTGRES_DB: vector
       POSTGRES_USER: youwei
       POSTGRES_PASSWORD: fromfastapi2genai
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
     ports:
       - "5119:5432"
     volumes:
