@@ -18,15 +18,13 @@ def create_vector_table(conn: psycopg.Connection):
                 'cuisines_content'::regclass,
                 if_not_exists => true,
                 loading => ai.loading_column(column_name=>'contents'),
-                embedding => ai.embedding_openai(
-                    model => 'text-embedding-3-small',
-                    dimensions => 1536,
-                    api_key_name => 'OPENAI_API_KEY'
-                ),
+                embedding => ai.embedding_openai('text-embedding-3-small', 1536, 'OPENAI_API_KEY'),
+                formatting => ai.formatting_python_template('contents: $chunk'),
                 destination => ai.destination_table(view_name=>'cuisines_vector')
             )
-        """)   
-    conn.commit()
+        """)
+                
+        conn.commit()
     
 if __name__ == "__main__":
     import pgai
