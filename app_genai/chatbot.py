@@ -11,7 +11,7 @@ load_dotenv()
 openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 MODEL = "gpt-4o-mini"
 
-def chatapi(query: str) -> str:
+def chat(query: str) -> str:
     """
     Chat function that uses similarity search to find the most relevant content.
     """
@@ -20,6 +20,7 @@ def chatapi(query: str) -> str:
     context = simiarity_search_sdk(query)
 
     # Generate response
+    print("Chatbot API")
     response = openai_client.responses.create(
         model=MODEL,
         input=[
@@ -41,4 +42,4 @@ def chatapi(query: str) -> str:
 
 
 if __name__ == "__main__":
-    print(chatapi("What is the price of Mapo Tofu?"))
+    print(chat("What is the price of Mapo Tofu and whether it is available in the store?"))

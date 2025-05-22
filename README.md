@@ -90,5 +90,9 @@ Switched to a new branch 'part01'
 - Create `explore_using_sdk.py` and demo
 - Create `search_using_sdk.py` and run examples
 
-### Part 04
-Bring pieces together.
+### Part 04: Bring pieces together.
+- Use openai responses api to create chat function
+- Run app_fastapi endpoint
+```bash
+>> cd app_fastapi && uv run uvicorn main:app --host 0.0.0.0 --port 8008 --reload
+```
