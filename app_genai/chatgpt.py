@@ -12,18 +12,13 @@ openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 MODEL = "gpt-4o-mini"
 
 def chat(query: str) -> str:
-    """
-    Chat function that uses similarity search to find the most relevant content.
-    """
-
     # Prepare context from search results
     context = simiarity_search_sdk(query)
 
-    # Generate response
-    print("Chat")
+    # Generate response    
     response = openai_client.responses.create(
         model=MODEL,
-        input=[
+        input=[ 
             {
                 "role": "developer",
                 "content": "You are a helpful assistant that answers user's questions based ONLY on the provided context."
@@ -39,7 +34,6 @@ def chat(query: str) -> str:
     )
 
     return response.output_text
-
 
 if __name__ == "__main__":
     user_input = "What is the price of Mapo Tofu and whether it is available in the store?"
