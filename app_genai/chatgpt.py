@@ -1,4 +1,4 @@
-# app_genai/chatbot.py
+# app_genai/chatgpt.py
 from app_genai.search.search_using_sdk import simiarity_search_sdk
 
 import os
@@ -20,7 +20,7 @@ def chat(query: str) -> str:
     context = simiarity_search_sdk(query)
 
     # Generate response
-    print("Chatbot API")
+    print("Chat")
     response = openai_client.responses.create(
         model=MODEL,
         input=[
@@ -42,4 +42,5 @@ def chat(query: str) -> str:
 
 
 if __name__ == "__main__":
-    print(chat("What is the price of Mapo Tofu and whether it is available in the store?"))
+    user_input = "What is the price of Mapo Tofu and whether it is available in the store?"
+    print(chat(user_input))

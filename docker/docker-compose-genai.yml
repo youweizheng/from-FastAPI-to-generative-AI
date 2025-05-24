@@ -4,7 +4,7 @@ services:
   app_business:
     build:
       context: ..
-      dockerfile: docker/Dockerfile.app
+      dockerfile: docker/Dockerfile.app_business
     container_name: "app_business"
     ports:
       - "8000:8000"
@@ -12,7 +12,7 @@ services:
     networks:
       - net
     volumes:
-      - ../app_business:/app
+      - ../app_business:/app/app_business
 
   db_business:
     image: timescale/timescaledb-ha:pg16

@@ -71,6 +71,11 @@ Switched to a new branch 'part01'
 - Create `create_table.py` and run
 - Create `insert_table.py` and run
 
+- To run the business app directly from CLI
+```bash
+>> uv run uvicorn app_business.main:app --host 0.0.0.0 --port 8000 --reload
+```
+
 ### Part 02: The only bridge you need is pagi
 - Run **vector database** and **vectorizer worker** with *Docker*
 ```bash
@@ -84,7 +89,7 @@ Switched to a new branch 'part01'
 ### Part 03: Search vector table using sdk
 - To re-create all the tables, you need to run:
 ```bash
->> docker compose -f docker/docker-compose-genai.yml down -v
+docker compose -f docker/docker-compose-genai.yml down -v
 ```
 
 - Create `explore_using_sdk.py` and demo
@@ -92,7 +97,8 @@ Switched to a new branch 'part01'
 
 ### Part 04: Bring pieces together.
 - Use openai responses api to create chat function
-- Run app_fastapi endpoint
+- Run app_fastapi endpoint locally
 ```bash
->> cd app_fastapi && uv run uvicorn main:app --host 0.0.0.0 --port 8008 --reload
+uv run uvicorn app_fastapi.main:app --host 0.0.0.0 --port 8008 --reload
 ```
+- Exercise: make app_fastapi integrated in the Docker

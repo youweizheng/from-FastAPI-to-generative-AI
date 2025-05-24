@@ -3,6 +3,14 @@ from sqlalchemy.orm import Session
 from app_business.models_business import Cuisine
 from app_business.database import BusinessSessionMaker
 
+db_session_global = BusinessSessionMaker()
+
+def query_all_cuisines_from_db():
+    """Get all cuisines from the database as plain text."""
+    cuisines = db_session_global.query(Cuisine).all()
+
+    return cuisines
+
 
 def query_all_cuisines(db_session: Session) -> str:
     """Get all cuisines from the database as plain text."""
