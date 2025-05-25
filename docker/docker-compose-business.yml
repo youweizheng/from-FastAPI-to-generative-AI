@@ -12,7 +12,7 @@ services:
     networks:
       - net
     volumes:
-      - ../app_business:/app
+      - ../app_business:/app/app_business
 
   db_business:
     image: timescale/timescaledb-ha:pg16

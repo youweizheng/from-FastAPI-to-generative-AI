@@ -10,11 +10,14 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements first to leverage Docker cache
-COPY ../requirements.txt .
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the application
-COPY ../app_business .
+# Copy the application code
+COPY app_business ./app_business
+
+# Set environment variable for database connection
+ENV DATABASE_BUSINESS_URL="postgresql://youwei:fromfastapi2genai@host.docker.internal:5118/business"
 
 # Command to run the application
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"] 
+CMD ["uvicorn", "app_business.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"] 
