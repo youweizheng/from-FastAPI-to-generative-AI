@@ -11,6 +11,8 @@ class CuisineCreate(BaseModel):
     description: str
     unit_price: int
     is_available: bool
+    instock: int
+    rating: float
 
 app = FastAPI()
 

@@ -79,3 +79,19 @@ Context Engineering
 
 ### Part 04
 Bring pieces together.
+
+### Alembic
+- makemigration
+```bash
+>> alembic revision --autogenerate -m "comments"
+```
+
+- migrate
+```bash
+>> alembic upgrade head
+```
+
+- revert to revision ID
+```bash
+>> alembic downgrade 0cbc4cf11d77
+```

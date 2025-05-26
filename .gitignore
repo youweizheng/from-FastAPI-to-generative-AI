@@ -16,3 +16,6 @@ uv.lock
 
 # Environment variables
 .env
+
+# Alembic
+alembic/versions/*
