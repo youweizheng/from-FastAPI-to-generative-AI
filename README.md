@@ -64,8 +64,19 @@ Switched to a new branch 'part01'
 
 - Run **app** and **business database** with *Docker*
 ```bash
->> docker compose -f docker/docker-compose-business.yml up -d --build
+docker compose -f docker/docker-compose-business.yml up -d --build
 ```
+
+- Run without **app** with *Docker*
+```bash
+docker-compose -f docker/docker-compose-genai.yml up -d --scale app_business=0
+```
+
+- Run **app** independently with *Docker*
+```bash
+docker-compose -f docker/docker-compose-genai.yml up -d app_business
+```
+
 
 - Create `models_business.py` to model business data
 - Create `create_table.py` and run
