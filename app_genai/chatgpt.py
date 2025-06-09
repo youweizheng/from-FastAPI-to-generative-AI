@@ -11,9 +11,9 @@ load_dotenv()
 openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 MODEL = "gpt-4o-mini"
 
-def chat(query: str) -> str:
+def chat(query: str, limit: int = 1) -> str:
     # Prepare context from search results
-    context = simiarity_search_sdk(query)
+    context = simiarity_search_sdk(query, limit)
 
     # Generate response    
     response = openai_client.responses.create(

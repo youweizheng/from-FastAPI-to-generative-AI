@@ -112,9 +112,10 @@ docker compose -f docker/docker-compose-genai.yml down -v
 ```bash
 uv run uvicorn app_fastapi.main:app --host 0.0.0.0 --port 8008 --reload
 ```
-- Exercise: make app_fastapi integrated in the Docker
+- Exercise: make ```app_fastapi``` integrated in the Docker
 
-### Part 05: Streamlit as frontend
+### Part 05: Frontend using streamlit
 ```bash
 uv run streamlit run frontend/app.py
 ```
+- Exercise: make ```app_frontend``` integrated in the Docker

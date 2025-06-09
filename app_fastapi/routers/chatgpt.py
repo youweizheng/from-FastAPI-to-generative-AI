@@ -12,5 +12,5 @@ router = APIRouter()
 
 @router.get("/chat")
 async def chat_endpoint(query: str):
-    return chat(query)
+    return chat(query, limit=3)
 
