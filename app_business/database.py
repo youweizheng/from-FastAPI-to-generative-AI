@@ -11,7 +11,7 @@ from fastapi import Depends
 # business database
 DATABASE_BUSINESS_URL = os.getenv(
     "DATABASE_BUSINESS_URL",
-    "postgresql://youwei:fromfastapi2genai@localhost:5118/business"
+    "postgresql://youwei:fromfastapi2genai@host.docker.internal:5118/business"
 )
 business_engine = create_engine(DATABASE_BUSINESS_URL)
 BusinessSessionMaker = sessionmaker(
