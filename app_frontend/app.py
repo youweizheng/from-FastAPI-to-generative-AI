@@ -9,7 +9,7 @@ st.set_page_config(
 )
 
 # Title
-st.title("Cuisine Chatbot")
+st.title("From FastAPI to GenAI Part 05: Cuisine Chatbot")
 
 # Initialize chat history in session state if it doesn't exist
 if "messages" not in st.session_state:

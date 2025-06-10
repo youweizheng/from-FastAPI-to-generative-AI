@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
-from app_business.models_business import Cuisine
-from app_business.database import BusinessSessionMaker
+from models_business import Cuisine
+from database import BusinessSessionMaker
 
 db_session_global = BusinessSessionMaker()
 

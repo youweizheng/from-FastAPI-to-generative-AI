@@ -3,8 +3,8 @@ from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 from sqlalchemy import inspect
 
-from app_business.query_table import query_all_cuisines_from_db
-from app_business.database import get_business_db
+from query_table import query_all_cuisines_from_db
+from database import get_business_db
 
 app = FastAPI()
 
